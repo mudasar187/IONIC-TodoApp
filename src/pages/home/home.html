@@ -17,8 +17,13 @@
 </ion-header>
 
 
-    <ion-content padding id="welcome">
-        <ion-list>
+    <ion-content padding>
+
+      <ion-row>
+        <button ion-button color="colorThree" block (click)="goToArchivedTodosPage()">Archived Todo's</button>
+      </ion-row>
+
+        <ion-list padding-top="20%">
           <ion-item *ngFor="let todo of todos | async">
             <!-- Code below will make todo's which is finished make text 'finish' -->
             <ion-label>{{todo.title}} {{todo.finished ? '(Finished)' : '' }}</ion-label>

@@ -10,13 +10,14 @@ import { Todo } from '../../models/Todo';
 })
 export class AddTodoPage {
 
-  public collection: AngularFirestoreCollection<Todo>;
-  public todoText: string = "";
+  public collection: AngularFirestoreCollection<Todo>; // collection
+  public todoText: string = ""; // todo text
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private toast: ToastController) {
     this.collection = navParams.get('todosCollection');
   }
 
+  // add todo to collection
   addTodo() {
     this.collection.add({ title: this.todoText, finished: false } as Todo)
       .then(response => {
@@ -36,6 +37,7 @@ export class AddTodoPage {
       })
   }
 
+  // Empty field when todo btn is clicked
   makeInputFieldEmpty() {
     this.todoText = "";
   }

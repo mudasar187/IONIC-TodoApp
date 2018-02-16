@@ -17,6 +17,7 @@ user = {} as User; // create an object of user
   constructor(public navCtrl: NavController, public navParams: NavParams, private af: AngularFirestore, private toast: ToastController) {
   }
 
+  // login method
   loginUser() {
     this.af.app.auth().signInWithEmailAndPassword(this.user.email, this.user.password).then(response => {
       this.toast.create({

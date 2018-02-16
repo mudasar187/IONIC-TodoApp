@@ -15,6 +15,7 @@ export class RegisterUserPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private af: AngularFirestore, private toast: ToastController) {
   }
 
+  // make a new account for new registered user
   registerUser() {
     this.af.app.auth().createUserWithEmailAndPassword(this.user.email, this.user.password).then(response => {
       this.toast.create({
