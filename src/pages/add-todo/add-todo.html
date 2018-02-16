@@ -1,0 +1,32 @@
+<ion-header>
+
+  <ion-navbar color="colorOne">
+    <ion-title align="center">Add Todo</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding id="welcome">
+
+  <ion-row>
+      <ion-item>
+          <ion-input type="text" placeholder="Enter your todo" [(ngModel)]="todoText" minLength=5 maxLength=30></ion-input>
+      </ion-item>
+    </ion-row>
+
+    <div padding *ngIf="todoText.length === 30">
+      <span class="global__input-error">Max 30 letters allowed</span>
+    </div>
+
+    <ion-row>
+      <ion-item>
+        <ion-datetime placeholder="Enter your date/time" displayFormat="MMM DD, HH:mm" [(ngModel)]="timestamp"></ion-datetime>
+      </ion-item>
+    </ion-row>
+
+    <ion-row padding-top="20%">
+        <button ion-button block color="colorThree" (click)="addTodo()" [disabled]="todoText.length < 5 || todoText.length > 30">Add Todo</button>
+    </ion-row>
+
+</ion-content>

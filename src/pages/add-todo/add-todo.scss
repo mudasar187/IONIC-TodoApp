@@ -1,0 +1,13 @@
+page-add-todo {
+  #welcome{
+    background: color($colors, colorTwo);
+  }
+
+  .item.item-input {
+    background-color: transparent;
+}
+
+.item.item-datetime {
+  background-color: transparent;
+}
+}
