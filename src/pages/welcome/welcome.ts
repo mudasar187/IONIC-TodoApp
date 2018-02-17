@@ -21,4 +21,9 @@ export class WelcomePage {
     this.navCtrl.push('RegisterUserPage')
   }
 
+  // send to about page
+  about() {
+    this.navCtrl.push('AboutPage');
+  }
+
 }
