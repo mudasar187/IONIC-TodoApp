@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController, NavParams } from 'ionic-angular';
+import { NavController, ToastController, NavParams, AlertController } from 'ionic-angular';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Todo } from '../../models/Todo';
 import { Observable } from 'rxjs/Observable';
@@ -15,7 +15,7 @@ export class HomePage {
   public todos: Observable<Todo[]>; // keep the list with all todos we have in firestore
   public collection: AngularFirestoreCollection<Todo>; // collection keep the referance to our collection
 
-  constructor(public navCtrl: NavController, private af: AngularFirestore, private toast: ToastController, private navParams: NavParams) {
+  constructor(public navCtrl: NavController, private af: AngularFirestore, private toast: ToastController, private navParams: NavParams, private alert: AlertController) {
     this.ionViewDidLoad();
     this.collection = af.collection<Todo>(''+this.currentUser+''); // create a referance to 'todos' collection in Firestore
     this.todos = this.collection.snapshotChanges() // Getting all todos from collection
@@ -70,6 +70,17 @@ export class HomePage {
       message: 'Logging out',
       duration: 2000
     }).present();
+  }
+
+  showContentInTodo(todo: Todo) {
+    this.collection.doc(todo.id);
+    let alert = this.alert.create({
+      title: todo.title,
+      subTitle: todo.content,
+      buttons: ['Ok'],
+      cssClass: 'alertCustomCss'
+    });
+    alert.present();
   }
 
   // when this is loading get user email adress, also using it to create a collection for users email

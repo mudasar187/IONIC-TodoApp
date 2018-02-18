@@ -31,3 +31,22 @@
 .item.item-input {
   background-color: transparent;
 }
+
+.alertCustomCss {
+  // text color for basic alerts
+  color: white;
+
+  button {
+      color: white !important; // button text color
+      background-color: color($colors, colorThree, base) !important;
+          //button bg color
+  }
+
+  .alert-message {
+      color: #e5ffff; // text color for confirm alerts
+  }
+
+  .alert-wrapper {
+      background-color: color($colors, colorThree, base); // bg color of alert content
+  }
+}

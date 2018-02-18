@@ -11,7 +11,9 @@ import { Todo } from '../../models/Todo';
 export class AddTodoPage {
 
   public collection: AngularFirestoreCollection<Todo>; // collection
-  public todoText: string = ""; // todo text
+  public todoTitle: string = ""; // add todo title
+  public todoContent: string = ""; // add todo
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private toast: ToastController) {
     this.collection = navParams.get('todosCollection');
@@ -19,12 +21,12 @@ export class AddTodoPage {
 
   // add todo to collection
   addTodo() {
-    this.collection.add({ title: this.todoText, finished: false } as Todo)
+    this.collection.add({ title: this.todoTitle, content: this.todoContent ,finished: false } as Todo)
       .then(response => {
         //console.log(response);
         this.makeInputFieldEmpty();
         this.toast.create({
-          message: "Todo added to the list",
+          message: 'Todo added to the list',
           duration: 2000
         }).present();
       })
@@ -39,7 +41,8 @@ export class AddTodoPage {
 
   // Empty field when todo btn is clicked
   makeInputFieldEmpty() {
-    this.todoText = "";
+    this.todoTitle = "";
+    this.todoContent = "";
   }
 
 }
