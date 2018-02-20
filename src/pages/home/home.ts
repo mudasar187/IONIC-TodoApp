@@ -3,6 +3,7 @@ import { NavController, ToastController, NavParams, AlertController } from 'ioni
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Todo } from '../../models/Todo';
 import { Observable } from 'rxjs/Observable';
+import { ArchivedTodo } from '../../models/ArchivedTodo';
 
 @Component({
   selector: 'page-home',
@@ -10,14 +11,13 @@ import { Observable } from 'rxjs/Observable';
 })
 export class HomePage {
 
-
   public currentUser: string; // get the UID so we can create a collection for each user who is registered
   public todos: Observable<Todo[]>; // keep the list with all todos we have in firestore
   public collection: AngularFirestoreCollection<Todo>; // collection keep the referance to our collection
 
   constructor(public navCtrl: NavController, private af: AngularFirestore, private toast: ToastController, private navParams: NavParams, private alert: AlertController) {
     this.ionViewDidLoad();
-    this.collection = af.collection<Todo>(''+this.currentUser+''); // create a referance to 'todos' collection in Firestore
+    this.collection = af.collection<Todo>(''+this.currentUser+'').doc('todos').collection('todosToBeDone'); // create a referance to 'todos' collection in Firestore
     this.todos = this.collection.snapshotChanges() // Getting all todos from collection
       .map(actions => {
         return actions.map(action => {
@@ -66,12 +66,14 @@ export class HomePage {
   // logout from app
   logOut() {
     this.af.app.auth().signOut();
+    this.navCtrl.push('WelcomePage');
     this.toast.create({
       message: 'Logging out',
       duration: 2000
     }).present();
   }
 
+  // shows the content in a todo doc, based on id in pop up window
   showContentInTodo(todo: Todo) {
     this.collection.doc(todo.id);
     let alert = this.alert.create({
@@ -85,7 +87,7 @@ export class HomePage {
 
   // when this is loading get user email adress, also using it to create a collection for users email
   ionViewDidLoad() {
-    this.currentUser = this.af.app.auth().currentUser.email;
+    this.currentUser = this.af.app.auth().currentUser.uid;
   }
 
 }

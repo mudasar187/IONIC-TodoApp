@@ -15,19 +15,21 @@ export class RegisterUserPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private af: AngularFirestore, private toast: ToastController) {
   }
 
-  // make a new account for new registered user
-  registerUser() {
-    this.af.app.auth().createUserWithEmailAndPassword(this.user.email, this.user.password).then(response => {
-      this.toast.create({
-        message: 'You are now registered',
-        duration: 2000
-      }).present();
-    }).catch(error => {
-      this.toast.create({
-        message: 'User not registered',
-        duration: 2000
-      }).present();
-    })
+   // make a new account for new registered user
+   registerUser(user: User) {
+    this.af.app.auth().createUserWithEmailAndPassword(user.email,user.password).then(response => {
+      let user = this.af.app.auth().currentUser;
+      user.sendEmailVerification();
+      this.navCtrl.push('WelcomePage');
+    }, err => {
+      if(err.code == 'auth/email-already-in-use') {
+        this.toast.create({
+          message: 'Email already in use',
+          duration: 2000
+        }).present();
+      }
+    });
   }
-
 }
+
+

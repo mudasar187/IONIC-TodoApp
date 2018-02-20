@@ -32,7 +32,9 @@
       </div>
 
       <ion-row padding-top="30%">
-        <button ion-button block color="colorThree" (click)="registerUser()" [disabled]="registerForm.invalid">Register</button>
+        <button ion-button block color="colorThree" (click)="registerUser(user)" [disabled]="registerForm.invalid">Register</button>
       </ion-row>
     </form>
+
+    <p class="verifyText">When your have registered your account, we will send you a verification mail<br>Verify your email before you login</p>
 </ion-content>
