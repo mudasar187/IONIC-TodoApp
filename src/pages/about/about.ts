@@ -1,12 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the AboutPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { EmailComposer } from '@ionic-native/email-composer';
 
 @IonicPage()
 @Component({
@@ -15,11 +9,31 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class AboutPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public emailSubject: string = "";
+  public emailBody: string = "";
+
+  constructor(private emailComposer: EmailComposer) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AboutPage');
-  }
+  sendEmail() {
+    let emailContent = {
+    to: 'mudasar@iam-developer.com',
+    cc: 'ahmmud16@hotmail.com',
+    subject: `${this.emailSubject}`,
+    body: `${this.emailBody}`,
+    isHtml: true
+  };
+
+  // Send a text message using default options
+  this.emailComposer.open(emailContent);
+}
+
+@ViewChild('myInput') myInput: ElementRef;
+resize() {
+  var element = this.myInput['_elementRef'].nativeElement.getElementsByClassName("text-input")[0];
+  var scrollHeight = element.scrollHeight;
+  element.style.height = scrollHeight + 'px';
+  this.myInput['_elementRef'].nativeElement.style.height = (scrollHeight + 16) + 'px';
+}
 
 }
