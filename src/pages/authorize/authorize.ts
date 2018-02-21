@@ -29,10 +29,6 @@ user = {} as User; // create an object of user
         }).present();
       } else {
       this.navCtrl.push(HomePage);
-      this.toast.create({
-        message: `Welcome ${user.email} !`,
-        duration: 2000
-      }).present();
     }
     }, error => {
       console.log(error);
