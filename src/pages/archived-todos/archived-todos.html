@@ -1,14 +1,35 @@
 <ion-header>
-
   <ion-navbar color="colorThree">
-    <ion-title align="center">Archived Todos</ion-title>
+    <ion-title align="center">
+      Your Todo's
+    </ion-title>
+    <ion-buttons right>
+      <button ion-button (click)="logOut()">
+        <ion-icon name="exit"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content padding>
+    <ion-content padding>
 
+      <ion-row>
+        <button ion-button color="colorThree" block (click)="goToTodosPage()">Your Todos</button>
+      </ion-row>
 
-
-</ion-content>
+        <ion-list padding-top="20%">
+          <ion-item *ngFor="let doneTodo of doneTodos | async">
+            <!-- Code below will make todo's which is finished make text 'finish' -->
+            <ion-label (click)="showContentInArchiveTodos(doneTodo)">{{doneTodo.title}} {{doneTodo.finished ? '(Finished)' : '' }}</ion-label>
+            <!-- On todo's which is finished, we deactivate the button -->
+            <!--
+            <button ion-button color="colorThree" item-end [disabled]="doneTodo.finished">
+                <ion-icon name="checkmark"></ion-icon>
+              </button> -->
+            <button ion-button color="danger" (click)="deleteTodo(doneTodo)" item-end>
+                <ion-icon name="trash"></ion-icon>
+            </button>
+          </ion-item>
+        </ion-list>
+      </ion-content>

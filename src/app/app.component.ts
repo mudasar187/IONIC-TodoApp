@@ -13,7 +13,7 @@ import { WelcomePage } from '../pages/welcome/welcome';
 })
 export class MyApp {
 
-  splash = true;
+  splash = true; // For the splash animation screen
 
   rootPage:any; // remove the homepage here, so we can start with welcome page if user is logged in otherwise redirect to homepage
 
@@ -35,6 +35,8 @@ export class MyApp {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
+
+      // for splash animation
       setTimeout(() => {
         this.splash = false;
         }, 3500);

@@ -26,14 +26,15 @@
         <ion-list padding-top="20%">
           <ion-item *ngFor="let todo of todos | async">
             <!-- Code below will make todo's which is finished make text 'finish' -->
-            <ion-label (click)="showContentInTodo(todo)">{{todo.title}} {{todo.finished ? '(Finished)' : '' }}</ion-label>
+            <ion-label (click)="showContentInTodo(todo)">{{todo.title}} {{todo.finished ? '(Finished)' : '' }}</ion-label> <!-- Sjekk med andreas -->
             <!-- On todo's which is finished, we deactivate the button -->
-            <button ion-button color="colorThree" item-end [disabled]="todo.finished" (click)="finishTodo(todo)">
+            <button ion-button color="colorThree" item-end (click)="finishTodo(todo)">
                 <ion-icon name="checkmark"></ion-icon>
               </button>
-            <button ion-button color="danger" item-end (click)="deleteTodo(todo)">
+
+            <!-- <button ion-button color="danger" item-end (click)="deleteTodo(todo)">
                 <ion-icon name="trash"></ion-icon>
-            </button>
+            </button> -->
           </ion-item>
         </ion-list>
       </ion-content>

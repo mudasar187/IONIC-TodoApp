@@ -15,6 +15,7 @@ export class AboutPage {
   constructor(private emailComposer: EmailComposer) {
   }
 
+  // send the email
   sendEmail() {
     let emailContent = {
     to: 'mudasar@iam-developer.com',
@@ -24,10 +25,11 @@ export class AboutPage {
     isHtml: true
   };
 
-  // Send a text message using default options
+  // Send a text message using default options on the phone
   this.emailComposer.open(emailContent);
 }
 
+// for the textarea in html file
 @ViewChild('myInput') myInput: ElementRef;
 resize() {
   var element = this.myInput['_elementRef'].nativeElement.getElementsByClassName("text-input")[0];

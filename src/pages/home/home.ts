@@ -11,13 +11,16 @@ import { ArchivedTodo } from '../../models/ArchivedTodo';
 })
 export class HomePage {
 
-  public currentUser: string; // get the UID so we can create a collection for each user who is registered
+  private currentUser: string; // get the UID so we can create a collection for each user who is registered
   public todos: Observable<Todo[]>; // keep the list with all todos we have in firestore
-  public collection: AngularFirestoreCollection<Todo>; // collection keep the referance to our collection
+  private collection: AngularFirestoreCollection<Todo>; // collection keep the referance to our todosToBeDone
 
-  constructor(public navCtrl: NavController, private af: AngularFirestore, private toast: ToastController, private navParams: NavParams, private alert: AlertController) {
+  private archivedCollection: AngularFirestoreCollection<ArchivedTodo>; // collection to keep the referance to our todoHasBeenDone collection
+
+  constructor(private navCtrl: NavController, private af: AngularFirestore, private toast: ToastController, private alert: AlertController) {
     this.ionViewDidLoad();
     this.collection = af.collection<Todo>(''+this.currentUser+'').doc('todos').collection('todosToBeDone'); // create a referance to 'todos' collection in Firestore
+    this.archivedCollection = af.collection<ArchivedTodo>(''+this.currentUser+'').doc('todos').collection('todosHasBeenDone'); // create a referance to 'todos' collection in Firestore
     this.todos = this.collection.snapshotChanges() // Getting all todos from collection
       .map(actions => {
         return actions.map(action => {
@@ -37,40 +40,23 @@ export class HomePage {
       finished: true
     });
     this.toast.create({
-      message: 'Todo finished and archived!',
+      message: `${todo.title} finished and archived!`,
       duration: 2000
     }).present();
+    this.deleteTodo(todo);
+    this.archiveTodo(todo);
   }
 
-  // Delete the selected todo doc
-  deleteTodo(todo: Todo) {
+archiveTodo(todo: Todo) {
+    let archivedTitle = todo.title;
+    let archivedContent = todo.content;
+    this.archivedCollection.add({title: archivedTitle, content: archivedContent, finished: true} as ArchivedTodo);
     this.collection.doc(todo.id).delete();
-    this.toast.create({
-      message: 'Todo deleted',
-      duration: 2000
-    }).present();
   }
 
-  // We send our collection in paramteer to a new page
-  goToAddTodoPage() {
-    this.navCtrl.push('AddTodoPage', {
-      todosCollection: this.collection
-    });
-  }
-
-  // go to the page where todo is archived
-  goToArchivedTodosPage() {
-    this.navCtrl.push('ArchivedTodosPage');
-  }
-
-  // logout from app
-  logOut() {
-    this.af.app.auth().signOut();
-    this.navCtrl.push('WelcomePage');
-    this.toast.create({
-      message: 'Logging out',
-      duration: 2000
-    }).present();
+    // Delete the selected todo doc
+deleteTodo(todo: Todo) {
+      this.collection.doc(todo.id).delete();
   }
 
   // shows the content in a todo doc, based on id in pop up window
@@ -84,6 +70,28 @@ export class HomePage {
     });
     alert.present();
   }
+
+    // logout from app
+logOut() {
+      this.af.app.auth().signOut();
+      this.navCtrl.push('WelcomePage');
+      this.toast.create({
+        message: 'Logging out',
+        duration: 2000
+      }).present();
+    }
+
+    // We send our collection in paramteer to a new page
+goToAddTodoPage() {
+      this.navCtrl.push('AddTodoPage', {
+        todosCollection: this.collection
+      });
+    }
+
+    // go to the page where todo is archived
+goToArchivedTodosPage() {
+      this.navCtrl.push('ArchivedTodosPage');
+    }
 
   // when this is loading get user email adress, also using it to create a collection for users email
   ionViewDidLoad() {

@@ -10,25 +10,25 @@ import { Todo } from '../../models/Todo';
 })
 export class AddTodoPage {
 
-  public collection: AngularFirestoreCollection<Todo>; // collection
+  private collection: AngularFirestoreCollection<Todo>; // collection
   public todoTitle: string = ""; // add todo title
   public todoContent: string = ""; // add todo
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private toast: ToastController) {
-    this.collection = navParams.get('todosCollection');
+  constructor(private navParams: NavParams, private toast: ToastController) {
+    this.collection = navParams.get('todosCollection'); // ????
   }
 
-  // add todo to collection
+  // add todo to todosToBeDone collection
   addTodo() {
     this.collection.add({ title: this.todoTitle, content: this.todoContent ,finished: false } as Todo)
       .then(response => {
         //console.log(response);
-        this.makeInputFieldEmpty();
         this.toast.create({
-          message: 'Todo added to the list',
+          message: `${this.todoTitle} added to the list`,
           duration: 2000
         }).present();
+        this.makeInputFieldEmpty();
       })
       .catch(error => {
         console.log(error);

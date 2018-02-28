@@ -6,12 +6,11 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { AngularFireModule } from 'angularfire2'; // Need this
 import { AngularFirestoreModule, AngularFirestore } from 'angularfire2/firestore'; // Need this
 import { AngularFireAuthModule } from 'angularfire2/auth'; // Need this
-import { EmailComposer } from '@ionic-native/email-composer';
+import { EmailComposer } from '@ionic-native/email-composer'; // Need for the email
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import env from '../environment/env'; // import the env file
-import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +19,6 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
-    FormsModule, // to use form validation
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(env), // init the env file
     AngularFireAuthModule, // import this module
