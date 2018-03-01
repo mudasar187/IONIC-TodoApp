@@ -9,32 +9,33 @@
       </button>
     </ion-buttons>
     <ion-buttons left>
-        <button ion-button (click)="goToAddTodoPage()">
-            <ion-icon name="add"></ion-icon>
-          </button>
+      <button ion-button (click)="goToAddTodoPage()">
+        <ion-icon name="add"></ion-icon>
+      </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 
-    <ion-content padding>
+<ion-content padding>
 
-      <ion-row>
-        <button ion-button color="colorThree" block (click)="goToArchivedTodosPage()">Archived Todo's</button>
-      </ion-row>
+  <ion-row>
+    <button ion-button color="colorThree" block (click)="goToArchivedTodosPage()">Archived Todo's</button>
+  </ion-row>
 
-        <ion-list padding-top="20%">
-          <ion-item *ngFor="let todo of todos | async">
-            <!-- Code below will make todo's which is finished make text 'finish' -->
-            <ion-label (click)="showContentInTodo(todo)">{{todo.title}} {{todo.finished ? '(Finished)' : '' }}</ion-label> <!-- Sjekk med andreas -->
-            <!-- On todo's which is finished, we deactivate the button -->
-            <button ion-button color="colorThree" item-end (click)="finishTodo(todo)">
-                <ion-icon name="checkmark"></ion-icon>
-              </button>
+  <ion-list padding-top="20%">
+    <ion-item *ngFor="let todo of todos | async">
+      <!-- Code below will make todo's which is finished make text 'finish' -->
+      <ion-label (click)="showContentInTodo(todo)">{{todo.title}} {{todo.finished ? '(Finished)' : '' }}</ion-label>
+      <!-- Sjekk med andreas -->
+      <!-- On todo's which is finished, we deactivate the button -->
+      <button ion-button color="colorThree" item-end (click)="finishTodo(todo)">
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
 
-            <!-- <button ion-button color="danger" item-end (click)="deleteTodo(todo)">
+      <!-- <button ion-button color="danger" item-end (click)="deleteTodo(todo)">
                 <ion-icon name="trash"></ion-icon>
             </button> -->
-          </ion-item>
-        </ion-list>
-      </ion-content>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -10,4 +10,4 @@ import { ArchivedTodosPage } from './archived-todos';
     IonicPageModule.forChild(ArchivedTodosPage),
   ],
 })
-export class ArchivedTodosPageModule {}
+export class ArchivedTodosPageModule { }

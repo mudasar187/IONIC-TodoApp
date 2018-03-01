@@ -10,4 +10,4 @@ import { AuthorizePage } from './authorize';
     IonicPageModule.forChild(AuthorizePage),
   ],
 })
-export class AuthorizePageModule {}
+export class AuthorizePageModule { }

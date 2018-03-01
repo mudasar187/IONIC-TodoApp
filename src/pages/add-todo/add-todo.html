@@ -10,27 +10,27 @@
 <ion-content padding>
 
   <ion-row>
-      <ion-item>
-          <ion-input type="text" placeholder="Title" [(ngModel)]="todoTitle" minLength=5 maxLength=15></ion-input>
-      </ion-item>
-    </ion-row>
+    <ion-item>
+      <ion-input type="text" placeholder="Title" [(ngModel)]="todoTitle" minLength=5 maxLength=15></ion-input>
+    </ion-item>
+  </ion-row>
 
-    <div padding *ngIf="todoTitle.length === 15">
-      <span class="global__input-error">Only 15 letters allowed</span>
-    </div>
+  <div padding *ngIf="todoTitle.length === 15">
+    <span class="global__input-error">Only 15 letters allowed</span>
+  </div>
 
-    <ion-row>
-      <ion-item>
-          <ion-input padding-top="20%" type="text" placeholder="Content" [(ngModel)]="todoContent" minLength=5 maxLength=50></ion-input>
-      </ion-item>
-    </ion-row>
+  <ion-row>
+    <ion-item>
+      <ion-input padding-top="20%" type="text" placeholder="Content" [(ngModel)]="todoContent" minLength=5 maxLength=50></ion-input>
+    </ion-item>
+  </ion-row>
 
-    <div padding *ngIf="todoContent.length === 50">
-      <span class="global__input-error">Only 50 letters allowed</span>
-    </div>
+  <div padding *ngIf="todoContent.length === 50">
+    <span class="global__input-error">Only 50 letters allowed</span>
+  </div>
 
-    <ion-row padding-top="20%">
-        <button ion-button block color="colorThree" (click)="addTodo()" [disabled]="todoTitle.length < 5 || todoTitle.length > 30 || todoContent.length < 5 || todoContent.length > 50">Add Todo</button>
-    </ion-row>
+  <ion-row padding-top="20%">
+    <button ion-button block color="colorThree" (click)="addTodo()" [disabled]="todoTitle.length < 5 || todoTitle.length > 30 || todoContent.length < 5 || todoContent.length > 50">Add Todo</button>
+  </ion-row>
 
 </ion-content>

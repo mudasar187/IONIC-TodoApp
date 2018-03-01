@@ -10,4 +10,4 @@ import { AddTodoPage } from './add-todo';
     IonicPageModule.forChild(AddTodoPage),
   ],
 })
-export class AddTodoPageModule {}
+export class AddTodoPageModule { }

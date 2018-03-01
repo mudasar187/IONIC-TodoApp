@@ -18,24 +18,24 @@ export class AboutPage {
   // send the email
   sendEmail() {
     let emailContent = {
-    to: 'mudasar@iam-developer.com',
-    cc: 'ahmmud16@hotmail.com',
-    subject: `${this.email.emailSubject}`,
-    body: `${this.email.emailBody}`,
-    isHtml: true
-  };
+      to: 'mudasar@iam-developer.com',
+      cc: 'ahmmud16@hotmail.com',
+      subject: `${this.email.emailSubject}`,
+      body: `${this.email.emailBody}`,
+      isHtml: true
+    };
 
-  // Send a text message using default options on the phone
-  this.emailComposer.open(emailContent);
-}
+    // Send a text message using default options on the phone
+    this.emailComposer.open(emailContent);
+  }
 
-// for the textarea in html file
-@ViewChild('myInput') myInput: ElementRef;
-resize() {
-  var element = this.myInput['_elementRef'].nativeElement.getElementsByClassName("text-input")[0];
-  var scrollHeight = element.scrollHeight;
-  element.style.height = scrollHeight + 'px';
-  this.myInput['_elementRef'].nativeElement.style.height = (scrollHeight + 16) + 'px';
-}
+  // for the textarea in html file
+  @ViewChild('myInput') myInput: ElementRef;
+  resize() {
+    var element = this.myInput['_elementRef'].nativeElement.getElementsByClassName("text-input")[0];
+    var scrollHeight = element.scrollHeight;
+    element.style.height = scrollHeight + 'px';
+    this.myInput['_elementRef'].nativeElement.style.height = (scrollHeight + 16) + 'px';
+  }
 
 }

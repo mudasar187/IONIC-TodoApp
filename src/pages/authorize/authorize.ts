@@ -13,38 +13,38 @@ import { HomePage } from '../home/home';
 })
 export class AuthorizePage {
 
-user = {} as User; // create an object of user
+  user = {} as User; // create an object of user
 
   constructor(public navCtrl: NavController, private af: AngularFirestore, private toast: ToastController) {
   }
 
 
   loginUser(user: User) {
-    this.af.app.auth().signInWithEmailAndPassword(user.email,user.password).then(response => {
+    this.af.app.auth().signInWithEmailAndPassword(user.email, user.password).then(response => {
       let checkUser = this.af.app.auth().currentUser;
-      if(!checkUser.emailVerified) {
+      if (!checkUser.emailVerified) {
         this.toast.create({
           message: 'Please verify your account',
           duration: 2000
         }).present();
       } else {
-      this.navCtrl.push(HomePage);
-    }
+        this.navCtrl.push(HomePage);
+      }
     }, error => {
       console.log(error);
-      switch(error.code) {
+      switch (error.code) {
         case 'auth/user-not-found':
-        this.toast.create({
-          message: 'User not exists',
-          duration: 2000
-        }).present();
-        break;
+          this.toast.create({
+            message: 'User not exists',
+            duration: 2000
+          }).present();
+          break;
         case 'auth/wrong-password':
-        this.toast.create({
-          message: 'Wrong password',
-          duration: 2000
-        }).present();
-        break;
+          this.toast.create({
+            message: 'Wrong password',
+            duration: 2000
+          }).present();
+          break;
 
       }
     });

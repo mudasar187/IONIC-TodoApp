@@ -8,24 +8,23 @@
 
 
 <ion-content padding>
-    <form #loginForm="ngForm" novalidate>
-        <ion-row>
+  <form #loginForm="ngForm" novalidate>
+    <ion-row>
 
-            <ion-item>
-              <ion-label floating>Email</ion-label>
-              <ion-input type="email" [(ngModel)]="user.email" name="email" #email="ngModel"
-              required pattern="[a-z0-9!#$%&'*+/=?^_`{\}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{\}~-]+)*@(?:[a-z0-9](?:[a-z0-9]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?">
-            </ion-input>
-            </ion-item>
+      <ion-item>
+        <ion-label floating>Email</ion-label>
+        <ion-input type="email" [(ngModel)]="user.email" name="email" #email="ngModel" required pattern="[a-z0-9!#$%&'*+/=?^_`{\}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{\}~-]+)*@(?:[a-z0-9](?:[a-z0-9]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?">
+        </ion-input>
+      </ion-item>
 
-            <ion-item>
-              <ion-label floating>Password</ion-label>
-              <ion-input type="password" [(ngModel)]="user.password" name="password" #password="ngModel" required pattern="(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{6,16}$"></ion-input>
-            </ion-item>
-          </ion-row>
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password" [(ngModel)]="user.password" name="password" #password="ngModel" required pattern="(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{6,16}$"></ion-input>
+      </ion-item>
+    </ion-row>
 
-          <ion-row padding-top="30%">
-            <button ion-button block color="colorThree" (click)="loginUser(user)" [disabled]="loginForm.invalid">LOGIN</button>
-          </ion-row>
-          </form>
+    <ion-row padding-top="30%">
+      <button ion-button block color="colorThree" (click)="loginUser(user)" [disabled]="loginForm.invalid">LOGIN</button>
+    </ion-row>
+  </form>
 </ion-content>

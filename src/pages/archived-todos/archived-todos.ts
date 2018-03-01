@@ -20,7 +20,7 @@ export class ArchivedTodosPage {
 
   constructor(public navCtrl: NavController, private af: AngularFirestore, private alert: AlertController, private toast: ToastController) {
     this.ionViewDidLoad();
-    this.collection = af.collection<Todo>(''+this.currentUser+'', (ref) => {
+    this.collection = af.collection<Todo>('' + this.currentUser + '', (ref) => {
       return ref.where('finished', '==', true);
     });
     this.todos = this.collection.snapshotChanges()
@@ -57,8 +57,8 @@ export class ArchivedTodosPage {
     alert.present();
   }
 
-   // logout from app
-   logOut() {
+  // logout from app
+  logOut() {
     this.af.app.auth().signOut();
     this.navCtrl.push('WelcomePage');
     this.toast.create({

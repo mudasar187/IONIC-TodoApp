@@ -10,4 +10,4 @@ import { NetworkOfflinePage } from './network-offline';
     IonicPageModule.forChild(NetworkOfflinePage),
   ],
 })
-export class NetworkOfflinePageModule {}
+export class NetworkOfflinePageModule { }

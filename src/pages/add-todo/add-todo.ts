@@ -20,7 +20,7 @@ export class AddTodoPage {
 
   // add todo to todosToBeDone collection
   addTodo() {
-    this.collection.add({ title: this.todoTitle, content: this.todoContent ,finished: false } as Todo)
+    this.collection.add({ title: this.todoTitle, content: this.todoContent, finished: false } as Todo)
       .then(response => {
         //console.log(response);
         this.toast.create({

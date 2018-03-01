@@ -12,24 +12,24 @@
 </ion-header>
 
 
-    <ion-content padding>
+<ion-content padding>
 
-      <ion-row>
-        <button ion-button color="colorThree" block (click)="goToTodosPage()">Your Todos</button>
-      </ion-row>
+  <ion-row>
+    <button ion-button color="colorThree" block (click)="goToTodosPage()">Your Todos</button>
+  </ion-row>
 
-        <ion-list padding-top="20%">
-          <ion-item *ngFor="let todo of todos | async">
-            <!-- Code below will make todo's which is finished make text 'finish' -->
-            <ion-label (click)="showContentInArchiveTodos(todo)">{{todo.title}} {{todo.finished ? '(Finished)' : '' }}</ion-label>
-            <!-- On todo's which is finished, we deactivate the button -->
-            <!--
+  <ion-list padding-top="20%">
+    <ion-item *ngFor="let todo of todos | async">
+      <!-- Code below will make todo's which is finished make text 'finish' -->
+      <ion-label (click)="showContentInArchiveTodos(todo)">{{todo.title}} {{todo.finished ? '(Finished)' : '' }}</ion-label>
+      <!-- On todo's which is finished, we deactivate the button -->
+      <!--
             <button ion-button color="colorThree" item-end [disabled]="doneTodo.finished">
                 <ion-icon name="checkmark"></ion-icon>
               </button> -->
-            <button ion-button color="danger" (click)="deleteTodo(todo)" item-end>
-                <ion-icon name="trash"></ion-icon>
-            </button>
-          </ion-item>
-        </ion-list>
-      </ion-content>
+      <button ion-button color="danger" (click)="deleteTodo(todo)" item-end>
+        <ion-icon name="trash"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-list>
+</ion-content>
