@@ -8,29 +8,45 @@
 
 
 <ion-content padding>
+  <form novalidate (ngSubmit)="addTodo(todo)" [formGroup]="todoForm">
 
-  <ion-row>
-    <ion-item>
-      <ion-input type="text" placeholder="Title" [(ngModel)]="todoTitle" minLength=5 maxLength=15></ion-input>
-    </ion-item>
-  </ion-row>
+    <ion-row>
+      <ion-item>
+        <ion-label floating>Title</ion-label>
+        <ion-input type="text" value="" [(ngModel)]="todo.title" formControlName="title"></ion-input>
+      </ion-item>
 
-  <div padding *ngIf="todoTitle.length === 15">
-    <span class="global__input-error">Only 15 letters allowed</span>
-  </div>
+      <ion-item class="errorBox" no-lines *ngIf="( todoForm.get('title').hasError('required') || todoForm.get('title').hasError('minlength') || todoForm.get('title').hasError('maxlength') ) && todoForm.get('title').touched">
 
-  <ion-row>
-    <ion-item>
-      <ion-input padding-top="20%" type="text" placeholder="Content" [(ngModel)]="todoContent" minLength=5 maxLength=50></ion-input>
-    </ion-item>
-  </ion-row>
+        <span class="global__input-error" *ngIf="todoForm.get('title').hasError('required')">
+          * Required</span>
+        <span class="global__input-error" *ngIf="todoForm.get('title').hasError('minlength')">
+          * Minimum 5 letters allowed</span>
+        <span class="global__input-error" *ngIf="todoForm.get('title').hasError('maxlength')">
+          * Maximum 30 letters allowed</span>
+      </ion-item>
 
-  <div padding *ngIf="todoContent.length === 50">
-    <span class="global__input-error">Only 50 letters allowed</span>
-  </div>
 
-  <ion-row padding-top="20%">
-    <button ion-button block color="colorThree" (click)="addTodo()" [disabled]="todoTitle.length < 5 || todoTitle.length > 30 || todoContent.length < 5 || todoContent.length > 50">Add Todo</button>
-  </ion-row>
+      <ion-item>
+        <ion-label floating>Content</ion-label>
+        <ion-textarea #myInput id="myInput" rows="1" (keyup)="resize()" [(ngModel)]="todo.content" formControlName="content"></ion-textarea>
+      </ion-item>
+
+      <ion-item class="errorBox" no-lines *ngIf="( todoForm.get('content').hasError('required') || todoForm.get('content').hasError('minlength') || todoForm.get('content').hasError('maxlength') ) && todoForm.get('content').touched">
+
+        <span class="global__input-error" *ngIf="todoForm.get('content').hasError('required')">
+          * Required</span>
+        <span class="global__input-error" *ngIf="todoForm.get('content').hasError('minlength')">
+          * Minimum 5 letters allowed</span>
+        <span class="global__input-error" *ngIf="todoForm.get('content').hasError('maxlength')">
+          * Maximum 100 letters allowed</span>
+      </ion-item>
+
+    </ion-row>
+
+    <ion-row padding-top="20%">
+      <button ion-button block color="colorThree" [disabled]="todoForm.invalid">Add Todo</button>
+    </ion-row>
+  </form>
 
 </ion-content>

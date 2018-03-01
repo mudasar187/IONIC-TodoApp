@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Todo } from '../../models/Todo';
+import { FormControl, FormGroup, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
+import { OnInit } from '@angular/core';
 
 @IonicPage()
 @Component({
@@ -10,24 +12,39 @@ import { Todo } from '../../models/Todo';
 })
 export class AddTodoPage {
 
+  todo = {} as Todo;
+  todoForm: FormGroup;
+
   private collection: AngularFirestoreCollection<Todo>; // collection
-  public todoTitle: string = ""; // add todo title
-  public todoContent: string = ""; // add todo
 
   constructor(private navParams: NavParams, private toast: ToastController) {
     this.collection = navParams.get('todosCollection'); // ????
   }
 
+  ngOnInit() {
+    this.todoForm = new FormGroup({
+      title: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(30)]),
+      content: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(100)])
+    });
+  }
+
+  clearForm() {
+    this.todoForm.reset({
+      'name': '',
+      'content': ''
+    });
+  }
+
   // add todo to todosToBeDone collection
-  addTodo() {
-    this.collection.add({ title: this.todoTitle, content: this.todoContent, finished: false } as Todo)
+  addTodo(todo: Todo) {
+    this.collection.add({ title: todo.title, content: todo.content, finished: false } as Todo)
       .then(response => {
         //console.log(response);
         this.toast.create({
-          message: `${this.todoTitle} added to the list`,
+          message: `${todo.title} added to the list`,
           duration: 2000
         }).present();
-        this.makeInputFieldEmpty();
+        this.clearForm();
       })
       .catch(error => {
         console.log(error);
@@ -38,10 +55,13 @@ export class AddTodoPage {
       })
   }
 
-  // Empty field when todo btn is clicked
-  makeInputFieldEmpty() {
-    this.todoTitle = "";
-    this.todoContent = "";
+  // for the textarea in html file
+  @ViewChild('myInput') myInput: ElementRef;
+  resize() {
+    var element = this.myInput['_elementRef'].nativeElement.getElementsByClassName("text-input")[0];
+    var scrollHeight = element.scrollHeight;
+    element.style.height = scrollHeight + 'px';
+    this.myInput['_elementRef'].nativeElement.style.height = (scrollHeight + 16) + 'px';
   }
 
 }

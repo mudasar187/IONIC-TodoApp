@@ -1,4 +1,4 @@
 export interface Email {
-  emailSubject: string;
-  emailBody: string;
+  subject: string;
+  content: string;
 }

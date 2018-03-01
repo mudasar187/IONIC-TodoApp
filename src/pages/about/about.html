@@ -25,28 +25,44 @@
 
   <p class="sendMeMail">Contant Me</p>
 
-  <ion-item>
-    <ion-label floating>Title</ion-label>
-    <ion-input type="text" [(ngModel)]="emailSubject" name="text" #text="ngModel" required pattern="^[a-zA-Z ]{0,50}$">
-    </ion-input>
-  </ion-item>
+  <form novalidate (ngSubmit)="sendEmail(email)" [formGroup]="emailForm">
+    <ion-row>
+      <ion-item>
+        <ion-label floating>Title</ion-label>
+        <ion-input type="text" value="" [(ngModel)]="email.subject" formControlName="subject"></ion-input>
+      </ion-item>
 
-  <div padding *ngIf="text.dirty && text.invalid">
-    <span class="global__input-error">Only letters allowed</span>
-  </div>
+      <ion-item class="errorBox" no-lines *ngIf="( emailForm.get('subject').hasError('required') || emailForm.get('subject').hasError('minlength') || emailForm.get('subject').hasError('maxlength') ) && emailForm.get('subject').touched">
+
+        <span class="global__input-error" *ngIf="emailForm.get('subject').hasError('required')">
+          * Required</span>
+        <span class="global__input-error" *ngIf="emailForm.get('subject').hasError('minlength')">
+          * Minimum 5 letters allowed</span>
+        <span class="global__input-error" *ngIf="emailForm.get('subject').hasError('maxlength')">
+          * Maximum 30 letters allowed</span>
+      </ion-item>
 
 
-  <ion-item>
-    <ion-label floating>Content</ion-label>
-    <ion-textarea #myInput id="myInput" rows="1" maxLength="500" (keyup)="resize()" [(ngModel)]="emailBody"></ion-textarea>
-  </ion-item>
+      <ion-item>
+        <ion-label floating>Content</ion-label>
+        <ion-textarea #myInput id="myInput" rows="1" (keyup)="resize()" [(ngModel)]="email.content" formControlName="content"></ion-textarea>
+      </ion-item>
 
-  <div padding *ngIf="emailBody.length === 500">
-    <span class="global__input-error">Max size 500</span>
-  </div>
+      <ion-item class="errorBox" no-lines *ngIf="( emailForm.get('content').hasError('required') || emailForm.get('content').hasError('minlength') || emailForm.get('content').hasError('maxlength') ) && emailForm.get('content').touched">
 
-  <ion-row padding-top="20%">
-    <button ion-button block color="colorThree" (click)="sendEmail()" [disabled]="emailBody.length < 20">Send email</button>
-  </ion-row>
+        <span class="global__input-error" *ngIf="emailForm.get('content').hasError('required')">
+          * Required</span>
+        <span class="global__input-error" *ngIf="emailForm.get('content').hasError('minlength')">
+          * Minimum 5 letters allowed</span>
+        <span class="global__input-error" *ngIf="emailForm.get('content').hasError('maxlength')">
+          * Maximum 100 letters allowed</span>
+      </ion-item>
+
+    </ion-row>
+
+    <ion-row padding-top="20%">
+      <button ion-button block color="colorThree" [disabled]="emailForm.invalid">Send email</button>
+    </ion-row>
+  </form>
 
 </ion-content>
