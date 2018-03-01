@@ -18,14 +18,12 @@
       </ion-item>
 
       <ion-item class="errorBox" no-lines *ngIf="( userForm.get('email').hasError('required') || userForm.get('email').hasError('email') ) && userForm.get('email').touched">
-
         <span class="global__input-error" *ngIf="userForm.get('email').hasError('required')">
-          * Required</span>
-
+          Email must be fill</span>
+        <br>
         <span class="global__input-error" *ngIf="userForm.get('email').hasError('email')">
-          Enter valid email
+          Email not valid
         </span>
-
       </ion-item>
 
       <ion-item>
@@ -36,7 +34,7 @@
       <ion-item class="errorBox" no-lines *ngIf="( userForm.get('password').hasError('required') ) && userForm.get('password').touched">
 
         <span class="global__input-error" *ngIf="userForm.get('password').hasError('required')">
-          Password is required
+          Password required
         </span>
 
       </ion-item>
@@ -50,11 +48,12 @@
       <ion-item class="errorBox" no-lines *ngIf="( userForm.get('re_password').hasError('equalTo') || userForm.get('re_password').hasError('required') ) && userForm.get('re_password').touched">
 
         <span class="global__input-error" *ngIf="userForm.get('re_password').hasError('required')">
-          Retype password must be fill
+          Retyping email must be fill
         </span>
-        <div class="global__input-error" *ngIf="userForm.get('re_password').hasError('equalTo')">
+        <br>
+        <span class="global__input-error" *ngIf="userForm.get('re_password').hasError('equalTo')">
           Password mismatch
-        </div>
+        </span>
       </ion-item>
     </ion-row>
 

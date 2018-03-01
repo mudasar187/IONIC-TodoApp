@@ -1,8 +1,8 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavParams, ToastController } from 'ionic-angular';
 import { AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Todo } from '../../models/Todo';
-import { FormControl, FormGroup, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { OnInit } from '@angular/core';
 
 @IonicPage()
@@ -10,7 +10,7 @@ import { OnInit } from '@angular/core';
   selector: 'page-add-todo',
   templateUrl: 'add-todo.html',
 })
-export class AddTodoPage {
+export class AddTodoPage implements OnInit {
 
   todo = {} as Todo;
   todoForm: FormGroup;

@@ -9,24 +9,38 @@
 
 <ion-content padding>
   <p class="aboutText">
-    Welcome to my first real-world Todo-App
-    <br> This is a school project
-    <br> Feel free to contact me on my mail,
-    <br> or visit my homepage
-    <br>
+    Todo's
+    <br> Version: 1.0
+    <br> Copyright © 2018
     <br>
   </p>
 
   <h1 class="linkText">
-    <a class="linkColor" href="https://www.iam-developer.com/">Homepage</a>
-    <br>
+    <a class="linkColor" href="https://www.iam-developer.com/">https://www.iam-developer.com/</a>
     <br>
   </h1>
 
-  <p class="sendMeMail">Contant Me</p>
+  <p class="sendMeMail">If you have any questions, suggestions, or comments, feel free to send me an email</p>
 
   <form novalidate (ngSubmit)="sendEmail(email)" [formGroup]="emailForm">
     <ion-row>
+
+        <ion-item>
+            <ion-label floating>Your email</ion-label>
+            <ion-input type="email" value="" [(ngModel)]="email.from" formControlName="email"></ion-input>
+          </ion-item>
+
+          <ion-item class="errorBox" no-lines *ngIf="( emailForm.get('email').hasError('required') || emailForm.get('email').hasError('email') ) && emailForm.get('email').touched">
+
+            <span class="global__input-error" *ngIf="emailForm.get('email').hasError('required')">
+              Field must be fill</span>
+              <br>
+            <span class="global__input-error" *ngIf="emailForm.get('email').hasError('email')">
+              Enter valid email
+            </span>
+
+          </ion-item>
+
       <ion-item>
         <ion-label floating>Title</ion-label>
         <ion-input type="text" value="" [(ngModel)]="email.subject" formControlName="subject"></ion-input>
@@ -35,9 +49,11 @@
       <ion-item class="errorBox" no-lines *ngIf="( emailForm.get('subject').hasError('required') || emailForm.get('subject').hasError('minlength') || emailForm.get('subject').hasError('maxlength') ) && emailForm.get('subject').touched">
 
         <span class="global__input-error" *ngIf="emailForm.get('subject').hasError('required')">
-          * Required</span>
+          Title must be fill</span>
+          <br>
         <span class="global__input-error" *ngIf="emailForm.get('subject').hasError('minlength')">
           * Minimum 5 letters allowed</span>
+          <br>
         <span class="global__input-error" *ngIf="emailForm.get('subject').hasError('maxlength')">
           * Maximum 30 letters allowed</span>
       </ion-item>
@@ -51,9 +67,11 @@
       <ion-item class="errorBox" no-lines *ngIf="( emailForm.get('content').hasError('required') || emailForm.get('content').hasError('minlength') || emailForm.get('content').hasError('maxlength') ) && emailForm.get('content').touched">
 
         <span class="global__input-error" *ngIf="emailForm.get('content').hasError('required')">
-          * Required</span>
+          Content must be fill</span>
+          <br>
         <span class="global__input-error" *ngIf="emailForm.get('content').hasError('minlength')">
           * Minimum 5 letters allowed</span>
+          <br>
         <span class="global__input-error" *ngIf="emailForm.get('content').hasError('maxlength')">
           * Maximum 100 letters allowed</span>
       </ion-item>
@@ -63,6 +81,7 @@
     <ion-row padding-top="20%">
       <button ion-button block color="colorThree" [disabled]="emailForm.invalid">Send email</button>
     </ion-row>
+
   </form>
 
 </ion-content>

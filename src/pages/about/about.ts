@@ -2,7 +2,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage } from 'ionic-angular';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { Email } from '../../models/Email';
-import { FormControl, FormGroup, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { OnInit } from '@angular/core';
 
 @IonicPage()
@@ -10,7 +10,7 @@ import { OnInit } from '@angular/core';
   selector: 'page-about',
   templateUrl: 'about.html',
 })
-export class AboutPage {
+export class AboutPage implements OnInit {
 
   email = {} as Email;
   emailForm: FormGroup;
@@ -20,6 +20,7 @@ export class AboutPage {
 
   ngOnInit() {
     this.emailForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
       subject: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(30)]),
       content: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(200)])
     });
@@ -29,7 +30,7 @@ export class AboutPage {
   sendEmail(email: Email) {
     let emailContent = {
       to: 'mudasar@iam-developer.com',
-      cc: 'ahmmud16@hotmail.com',
+      cc: `${this.email.from}`,
       subject: `${this.email.subject}`,
       body: `${this.email.content}`,
       isHtml: true
@@ -47,5 +48,7 @@ export class AboutPage {
     element.style.height = scrollHeight + 'px';
     this.myInput['_elementRef'].nativeElement.style.height = (scrollHeight + 16) + 'px';
   }
+
+
 
 }

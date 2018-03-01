@@ -3,6 +3,8 @@ import { IonicPage, NavController, ToastController } from 'ionic-angular';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { User } from '../../models/User';
 import { HomePage } from '../home/home';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { OnInit } from '@angular/core';
 
 
 
@@ -11,14 +13,21 @@ import { HomePage } from '../home/home';
   selector: 'page-authorize',
   templateUrl: 'authorize.html',
 })
-export class AuthorizePage {
+export class AuthorizePage implements OnInit {
 
   user = {} as User; // create an object of user
+  loginForm: FormGroup;
 
   constructor(public navCtrl: NavController, private af: AngularFirestore, private toast: ToastController) {
   }
 
-  // TODO: add formcontrol here too
+  ngOnInit() {
+    this.loginForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required])
+    });
+
+  }
 
   loginUser(user: User) {
     this.af.app.auth().signInWithEmailAndPassword(user.email, user.password).then(response => {
@@ -36,13 +45,13 @@ export class AuthorizePage {
       switch (error.code) {
         case 'auth/user-not-found':
           this.toast.create({
-            message: 'User not exists',
+            message: 'Wrong username/password',
             duration: 2000
           }).present();
           break;
         case 'auth/wrong-password':
           this.toast.create({
-            message: 'Wrong password',
+            message: 'Wrong username/password',
             duration: 2000
           }).present();
           break;

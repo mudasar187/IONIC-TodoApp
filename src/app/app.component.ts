@@ -5,7 +5,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { WelcomePage } from '../pages/welcome/welcome';
 
 
 @Component({
