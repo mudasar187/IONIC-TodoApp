@@ -34,4 +34,4 @@ $RECYCLE.BIN/
 Thumbs.db
 UserInterfaceState.xcuserstate
 
-TodoAppFirestore/src/environment/env.ts
+/src/environment/env.ts
