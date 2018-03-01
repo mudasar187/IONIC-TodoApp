@@ -18,6 +18,7 @@ export class AuthorizePage {
   constructor(public navCtrl: NavController, private af: AngularFirestore, private toast: ToastController) {
   }
 
+  // TODO: add formcontrol here too
 
   loginUser(user: User) {
     this.af.app.auth().signInWithEmailAndPassword(user.email, user.password).then(response => {
