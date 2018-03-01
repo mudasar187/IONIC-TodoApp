@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, ToastController,AlertController } from 'ionic-angular';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Todo } from '../../models/Todo';
 import { Observable } from 'rxjs/Observable';
-import { ArchivedTodo } from '../../models/ArchivedTodo';
 
 @Component({
   selector: 'page-home',
@@ -13,14 +12,13 @@ export class HomePage {
 
   private currentUser: string; // get the UID so we can create a collection for each user who is registered
   public todos: Observable<Todo[]>; // keep the list with all todos we have in firestore
-  private collection: AngularFirestoreCollection<Todo>; // collection keep the referance to our todosToBeDone
-
-  private archivedCollection: AngularFirestoreCollection<ArchivedTodo>; // collection to keep the referance to our todoHasBeenDone collection
+  private collection: AngularFirestoreCollection<Todo>; // collection keep the referance to our todos
 
   constructor(private navCtrl: NavController, private af: AngularFirestore, private toast: ToastController, private alert: AlertController) {
     this.ionViewDidLoad();
-    this.collection = af.collection<Todo>(''+this.currentUser+'').doc('todos').collection('todosToBeDone'); // create a referance to 'todos' collection in Firestore
-    this.archivedCollection = af.collection<ArchivedTodo>(''+this.currentUser+'').doc('todos').collection('todosHasBeenDone'); // create a referance to 'todos' collection in Firestore
+    this.collection = af.collection<Todo>(''+this.currentUser+'', (ref) => {
+      return ref.where('finished', '==', false);
+    }); // creating a reference to collection where we want all todos == false
     this.todos = this.collection.snapshotChanges() // Getting all todos from collection
       .map(actions => {
         return actions.map(action => {
@@ -34,7 +32,7 @@ export class HomePage {
       });
   }
 
-  // Updating finished on todo-doc in firebase based on todo's ID
+  // Update todo == true, and now showing anymore , they shows in archived todos page
   finishTodo(todo: Todo) {
     this.collection.doc(todo.id).update({
       finished: true
@@ -43,20 +41,6 @@ export class HomePage {
       message: `${todo.title} finished and archived!`,
       duration: 2000
     }).present();
-    this.deleteTodo(todo);
-    this.archiveTodo(todo);
-  }
-
-archiveTodo(todo: Todo) {
-    let archivedTitle = todo.title;
-    let archivedContent = todo.content;
-    this.archivedCollection.add({title: archivedTitle, content: archivedContent, finished: true} as ArchivedTodo);
-    this.collection.doc(todo.id).delete();
-  }
-
-    // Delete the selected todo doc
-deleteTodo(todo: Todo) {
-      this.collection.doc(todo.id).delete();
   }
 
   // shows the content in a todo doc, based on id in pop up window

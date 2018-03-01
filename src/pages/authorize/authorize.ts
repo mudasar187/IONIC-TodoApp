@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController } from 'ionic-angular';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { User } from '../../models/User';
 import { HomePage } from '../home/home';
@@ -15,7 +15,7 @@ export class AuthorizePage {
 
 user = {} as User; // create an object of user
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private af: AngularFirestore, private toast: ToastController) {
+  constructor(public navCtrl: NavController, private af: AngularFirestore, private toast: ToastController) {
   }
 
 

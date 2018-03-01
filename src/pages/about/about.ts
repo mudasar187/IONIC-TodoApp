@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular';
 import { EmailComposer } from '@ionic-native/email-composer';
+import { Email } from '../../models/Email';
 
 @IonicPage()
 @Component({
@@ -9,8 +10,7 @@ import { EmailComposer } from '@ionic-native/email-composer';
 })
 export class AboutPage {
 
-  public emailSubject: string = "";
-  public emailBody: string = "";
+  email = {} as Email;
 
   constructor(private emailComposer: EmailComposer) {
   }
@@ -20,8 +20,8 @@ export class AboutPage {
     let emailContent = {
     to: 'mudasar@iam-developer.com',
     cc: 'ahmmud16@hotmail.com',
-    subject: `${this.emailSubject}`,
-    body: `${this.emailBody}`,
+    subject: `${this.email.emailSubject}`,
+    body: `${this.email.emailBody}`,
     isHtml: true
   };
 

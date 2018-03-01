@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, AlertController, ToastController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
-import { ArchivedTodo } from '../../models/ArchivedTodo';
 import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
 import { HomePage } from '../home/home';
+import { Todo } from '../../models/Todo';
 
 
 @IonicPage()
@@ -14,17 +14,19 @@ import { HomePage } from '../home/home';
 export class ArchivedTodosPage {
 
   public currentUser: string; // get the UID so we can create a collection for each user who is registered
-  public doneTodos: Observable<ArchivedTodo[]>;
-  public doneTodosCollection: AngularFirestoreCollection<ArchivedTodo>;
+  public todos: Observable<Todo[]>; // keep the list with all todos we have in firestore
+  private collection: AngularFirestoreCollection<Todo>; // collection keep the referance to our todos
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private af: AngularFirestore, private alert: AlertController, private toast: ToastController) {
+  constructor(public navCtrl: NavController, private af: AngularFirestore, private alert: AlertController, private toast: ToastController) {
     this.ionViewDidLoad();
-    this.doneTodosCollection = af.collection<ArchivedTodo>(''+this.currentUser+'').doc('todos').collection('todosHasBeenDone'); // create a referance to 'todos' collection in Firestore
-    this.doneTodos = this.doneTodosCollection.snapshotChanges() // Getting all todos from collection
+    this.collection = af.collection<Todo>(''+this.currentUser+'', (ref) => {
+      return ref.where('finished', '==', true);
+    });
+    this.todos = this.collection.snapshotChanges()
       .map(actions => {
         return actions.map(action => {
-          let data = action.payload.doc.data() as ArchivedTodo;
+          let data = action.payload.doc.data() as Todo;
           let id = action.payload.doc.id;
           return {
             id,
@@ -35,20 +37,20 @@ export class ArchivedTodosPage {
   }
 
   // Delete the selected todo doc
-  deleteTodo(archivedTodo: ArchivedTodo) {
+  deleteTodo(todo: Todo) {
     this.toast.create({
-      message: `${archivedTodo.title} deleted!`,
+      message: `${todo.title} deleted!`,
       duration: 2000
     }).present();
-    this.doneTodosCollection.doc(archivedTodo.id).delete();
+    this.collection.doc(todo.id).delete();
   }
 
   // shows the content in a todo doc, based on id in pop up window
-  showContentInArchiveTodos(doneTodo: ArchivedTodo) {
-    this.doneTodosCollection.doc(doneTodo.id);
+  showContentInArchiveTodos(todo: Todo) {
+    // this.doneTodosCollection.doc(doneTodo.id);
     let alert = this.alert.create({
-      title: doneTodo.title,
-      subTitle: doneTodo.content,
+      title: todo.title,
+      subTitle: todo.content,
       buttons: ['Ok'],
       cssClass: 'alertCustomCss'
     });

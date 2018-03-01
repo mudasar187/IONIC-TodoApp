@@ -11,6 +11,7 @@ import { EmailComposer } from '@ionic-native/email-composer'; // Need for the em
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import env from '../environment/env'; // import the env file
+import { Network } from '@ionic-native/network'; // import network
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import env from '../environment/env'; // import the env file
     HomePage
   ],
   providers: [
+    Network,
     StatusBar,
     SplashScreen,
     EmailComposer,

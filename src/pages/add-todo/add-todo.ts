@@ -14,7 +14,6 @@ export class AddTodoPage {
   public todoTitle: string = ""; // add todo title
   public todoContent: string = ""; // add todo
 
-
   constructor(private navParams: NavParams, private toast: ToastController) {
     this.collection = navParams.get('todosCollection'); // ????
   }
