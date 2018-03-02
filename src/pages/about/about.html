@@ -61,18 +61,18 @@
 
       <ion-item>
         <ion-label floating>Content</ion-label>
-        <ion-textarea #myInput id="myInput" rows="1" (keyup)="resize()" [(ngModel)]="email.content" formControlName="content"></ion-textarea>
+        <ion-textarea #myInput id="myInput" rows="1" (keyup)="resize()" [(ngModel)]="email.body" formControlName="body"></ion-textarea>
       </ion-item>
 
-      <ion-item class="errorBox" no-lines *ngIf="( emailForm.get('content').hasError('required') || emailForm.get('content').hasError('minlength') || emailForm.get('content').hasError('maxlength') ) && emailForm.get('content').touched">
+      <ion-item class="errorBox" no-lines *ngIf="( emailForm.get('body').hasError('required') || emailForm.get('body').hasError('minlength') || emailForm.get('body').hasError('maxlength') ) && emailForm.get('body').touched">
 
-        <span class="global__input-error" *ngIf="emailForm.get('content').hasError('required')">
+        <span class="global__input-error" *ngIf="emailForm.get('body').hasError('required')">
           Content must be fill</span>
           <br>
-        <span class="global__input-error" *ngIf="emailForm.get('content').hasError('minlength')">
+        <span class="global__input-error" *ngIf="emailForm.get('body').hasError('minlength')">
           * Minimum 5 letters allowed</span>
           <br>
-        <span class="global__input-error" *ngIf="emailForm.get('content').hasError('maxlength')">
+        <span class="global__input-error" *ngIf="emailForm.get('body').hasError('maxlength')">
           * Maximum 100 letters allowed</span>
       </ion-item>
 

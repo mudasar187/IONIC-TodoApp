@@ -22,7 +22,7 @@ export class AboutPage implements OnInit {
     this.emailForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       subject: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(30)]),
-      content: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(200)])
+      body: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(200)])
     });
   }
 
@@ -32,7 +32,7 @@ export class AboutPage implements OnInit {
       to: 'mudasar@iam-developer.com',
       cc: `${this.email.from}`,
       subject: `${this.email.subject}`,
-      body: `${this.email.content}`,
+      body: `${this.email.body}`,
       isHtml: true
     };
 

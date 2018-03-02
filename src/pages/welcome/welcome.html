@@ -1,19 +1,13 @@
-<ion-header>
-
-  <ion-navbar color="colorThree">
-    <ion-title align="center">Welcome</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
 <ion-content padding>
   <img src="assets/imgs/todo.png">
   <h2 align="center">Your personal Todo's !</h2>
 
-  <ion-row padding-top="30%">
+  <ion-row>
     <button ion-button block color="colorThree" (click)="signIn()">SIGN IN</button>
     <button ion-button block color="light" (click)="register()">REGISTER</button>
-    <button ion-button block color="light" (click)="about()">ABOUT</button>
+  </ion-row>
+
+  <ion-row class="aboutBtnRow">
+  <button class="aboutBtn" ion-button (click)="about()" clear>About</button>
   </ion-row>
 </ion-content>
