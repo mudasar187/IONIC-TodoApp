@@ -27,6 +27,9 @@
             <button ion-button color="colorThree" item-end [disabled]="doneTodo.finished">
                 <ion-icon name="checkmark"></ion-icon>
               </button> -->
+      <button ion-button color="colorThree" (click)="undoTodo(todo)" item-end>
+        <ion-icon name="undo"></ion-icon>
+      </button>
       <button ion-button color="danger" (click)="deleteTodo(todo)" item-end>
         <ion-icon name="trash"></ion-icon>
       </button>

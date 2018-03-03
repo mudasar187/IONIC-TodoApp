@@ -39,10 +39,20 @@ export class ArchivedTodosPage {
   // Delete the selected todo doc
   deleteTodo(todo: Todo) {
     this.toast.create({
-      message: `${todo.title} deleted!`,
+      message: `${todo.title} deleted`,
       duration: 2000
     }).present();
     this.collection.doc(todo.id).delete();
+  }
+
+  undoTodo(todo: Todo) {
+    this.collection.doc(todo.id).update({
+      finished: false
+    });
+    this.toast.create({
+      message: `Undo ${todo.title} todo`,
+      duration: 2000
+    }).present();
   }
 
   // shows the content in a todo doc, based on id in pop up window

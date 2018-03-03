@@ -26,10 +26,12 @@
   <ion-list padding-top="20%">
     <ion-item *ngFor="let todo of todos | async">
       <ion-label (click)="showContentInTodo(todo)">{{todo.title}} {{todo.finished ? '(Finished)' : '' }}</ion-label>
+      <button ion-button color="colorThree" item-end (click)="editTodo(todo)">
+        <ion-icon name="create"></ion-icon>
+      </button>
       <button ion-button color="colorThree" item-end (click)="finishTodo(todo)">
         <ion-icon name="checkmark"></ion-icon>
       </button>
-
     </ion-item>
   </ion-list>
 </ion-content>

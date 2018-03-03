@@ -38,7 +38,7 @@ export class HomePage {
       finished: true
     });
     this.toast.create({
-      message: `${todo.title} finished and archived!`,
+      message: `${todo.title} finished and archived`,
       duration: 2000
     }).present();
   }
@@ -50,6 +50,48 @@ export class HomePage {
       title: todo.title,
       subTitle: todo.content,
       buttons: ['Ok'],
+      cssClass: 'alertCustomCss'
+    });
+    alert.present();
+  }
+
+  editTodo(todo: Todo) {
+    let todoTitle = todo.title;
+    console.log(todo.title);
+    console.log(todo.content);
+    let alert = this.alert.create({
+      title: 'Edit Todo',
+      inputs: [
+        {
+          name: 'title',
+          placeholder: `${todo.title}`
+        },
+        {
+          name: 'content',
+          placeholder: `${todo.content}`
+        }
+      ],
+      buttons: [
+        {
+          text: 'Edit',
+          handler: data => {
+            this.collection.doc(todo.id).update({
+              title: data.title,
+              content: data.content
+            });
+            this.toast.create({
+              message: `Edited ${todo.title} todo`,
+              duration: 2000
+            }).present();
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+          }
+        }
+      ],
       cssClass: 'alertCustomCss'
     });
     alert.present();
