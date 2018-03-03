@@ -5,15 +5,22 @@ page-welcome {
         margin: 0 auto;
         display: block;
     }
-
-    .aboutBtn{
-      color: #00695c;
-      font-size: 13px;
-      left: 200%;
+    .btnColor {
+        color: #00695c;
+        font-size: 13px;
+        left: 200%;
     }
-
-    .aboutBtnRow{
-     position: absolute;
-     bottom: 10px;
+    .aboutBtnRow {
+        position: absolute;
+        bottom: 10px;
+    }
+    .resetBtn {
+        color: #00695c;
+        font-size: 10px;
+        left: 115%;
+    }
+    .resetBtnRow {
+        position: absolute;
+        bottom: 150px;
     }
 }

@@ -7,7 +7,11 @@
     <button ion-button block color="light" (click)="register()">REGISTER</button>
   </ion-row>
 
+  <ion-row class="resetBtnRow">
+    <button class="resetBtn" ion-button (click)="goToResetPasswordPage()" clear>Reset password?</button>
+  </ion-row>
+
   <ion-row class="aboutBtnRow">
-  <button class="aboutBtn" ion-button (click)="about()" clear>About</button>
+    <button class="btnColor" ion-button (click)="about()" clear>About</button>
   </ion-row>
 </ion-content>

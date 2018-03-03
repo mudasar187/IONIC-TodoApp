@@ -8,39 +8,39 @@
 
 
 <ion-content padding>
-    <form novalidate (ngSubmit)="loginUser(user)" [formGroup]="loginForm">
+  <form novalidate (ngSubmit)="loginUser(user)" [formGroup]="loginForm">
     <ion-row>
 
-        <ion-item>
-            <ion-label floating>Email</ion-label>
-            <ion-input type="email" [(ngModel)]="user.email" formControlName="email"></ion-input>
-          </ion-item>
+      <ion-item>
+        <ion-label floating>Email</ion-label>
+        <ion-input type="email" [(ngModel)]="user.email" formControlName="email"></ion-input>
+      </ion-item>
 
-          <ion-item class="errorBox" no-lines *ngIf="( loginForm.get('email').hasError('required') || loginForm.get('email').hasError('email') ) && loginForm.get('email').touched">
+      <ion-item class="errorBox" no-lines *ngIf="( loginForm.get('email').hasError('required') || loginForm.get('email').hasError('email') ) && loginForm.get('email').touched">
 
-            <span class="global__input-error" *ngIf="loginForm.get('email').hasError('required')">
-              Email must be fill</span>
-              <br>
-            <span class="global__input-error" *ngIf="loginForm.get('email').hasError('email')">
-              Enter valid email
-            </span>
+        <span class="global__input-error" *ngIf="loginForm.get('email').hasError('required')">
+          Email must be fill</span>
+        <br>
+        <span class="global__input-error" *ngIf="loginForm.get('email').hasError('email')">
+          Enter valid email
+        </span>
 
-          </ion-item>
+      </ion-item>
 
-          <ion-item>
-            <ion-label floating>Password</ion-label>
-            <ion-input type="password" value="" [(ngModel)]="user.password" formControlName="password"></ion-input>
-          </ion-item>
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password" value="" [(ngModel)]="user.password" formControlName="password"></ion-input>
+      </ion-item>
 
-          <ion-item class="errorBox" no-lines *ngIf="( loginForm.get('password').hasError('required') ) && loginForm.get('password').touched">
+      <ion-item class="errorBox" no-lines *ngIf="( loginForm.get('password').hasError('required') ) && loginForm.get('password').touched">
 
-            <span class="global__input-error" *ngIf="loginForm.get('password').hasError('required')">
-              Password required
-            </span>
+        <span class="global__input-error" *ngIf="loginForm.get('password').hasError('required')">
+          Password required
+        </span>
 
-          </ion-item>
+      </ion-item>
 
-      </ion-row>
+    </ion-row>
 
     <ion-row padding-top="30%">
       <button ion-button block color="colorThree" [disabled]="loginForm.invalid">LOGIN</button>

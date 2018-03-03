@@ -16,11 +16,11 @@ export class WelcomePage {
   */
 
   constructor(public navCtrl: NavController, private emailComposer: EmailComposer, private network: Network, private toast: ToastController) {
-    this.emailComposer.isAvailable().then((available: boolean) => {
+    /* this.emailComposer.isAvailable().then((available: boolean) => {
       if (available) {
         // Now we know we can send
       }
-    });
+    }); */
   }
 
   /*
@@ -51,6 +51,10 @@ export class WelcomePage {
     this.disconnected.unsubscribe();
   }
   */
+
+  goToResetPasswordPage() {
+    this.navCtrl.push('ResetPasswordPage')
+  }
 
   // Send to login page
   signIn() {
