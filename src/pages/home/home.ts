@@ -12,7 +12,7 @@ export class HomePage {
 
   private currentUser: string; // get the UID so we can create a collection for each user who is registered
   public todos: Observable<Todo[]>; // keep the list with all todos we have in firestore
-  private collection: AngularFirestoreCollection<Todo>; // collection keep the referance to our todos
+  public collection: AngularFirestoreCollection<Todo>; // collection keep the referance to our todos
 
   constructor(private navCtrl: NavController, private af: AngularFirestore, private toast: ToastController, private alert: AlertController) {
     this.ionViewDidLoad();
@@ -55,6 +55,7 @@ export class HomePage {
     alert.present();
   }
 
+  // edit todo TODO: small bugs, check out
   editTodo(todo: Todo) {
     let todoTitle = todo.title;
     console.log(todo.title);

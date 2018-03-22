@@ -18,6 +18,7 @@
 
       <ion-item class="errorBox" no-lines *ngIf="( loginForm.get('email').hasError('required') || loginForm.get('email').hasError('email') ) && loginForm.get('email').touched">
 
+        
         <span class="global__input-error" *ngIf="loginForm.get('email').hasError('required')">
           Email must be fill</span>
         <br>

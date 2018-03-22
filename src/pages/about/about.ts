@@ -26,7 +26,7 @@ export class AboutPage implements OnInit {
     });
   }
 
-  // send the email
+  // Send email
   sendEmail(email: Email) {
     let emailContent = {
       to: 'mudasar@iam-developer.com',

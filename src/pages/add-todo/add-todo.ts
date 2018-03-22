@@ -18,7 +18,7 @@ export class AddTodoPage implements OnInit {
   private collection: AngularFirestoreCollection<Todo>; // collection
 
   constructor(private navParams: NavParams, private toast: ToastController) {
-    this.collection = navParams.get('todosCollection'); // ????
+    this.collection = navParams.get('todosCollection'); // get collection
   }
 
   ngOnInit() {
@@ -28,6 +28,7 @@ export class AddTodoPage implements OnInit {
     });
   }
 
+  // clear form after name and content is filled in
   clearForm() {
     this.todoForm.reset({
       'name': '',
@@ -35,7 +36,7 @@ export class AddTodoPage implements OnInit {
     });
   }
 
-  // add todo to todosToBeDone collection
+  // add todo
   addTodo(todo: Todo) {
     this.collection.add({ title: todo.title, content: todo.content, finished: false } as Todo)
       .then(response => {

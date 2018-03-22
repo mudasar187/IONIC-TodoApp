@@ -29,6 +29,7 @@ export class AuthorizePage implements OnInit {
 
   }
 
+  // login user
   loginUser(user: User) {
     this.af.app.auth().signInWithEmailAndPassword(user.email, user.password).then(response => {
       let checkUser = this.af.app.auth().currentUser;
@@ -60,6 +61,7 @@ export class AuthorizePage implements OnInit {
     });
   }
 
+  // send email verification
   sendEmailVerification(user: User) {
     let checkUser = this.af.app.auth().currentUser;
     checkUser.sendEmailVerification();

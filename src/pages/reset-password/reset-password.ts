@@ -23,6 +23,7 @@ export class ResetPasswordPage implements OnInit {
     });
   }
 
+  // reset the password
   resetPassword(email: string) {
     let auth = this.af.app.auth();
     return auth.sendPasswordResetEmail(email)
