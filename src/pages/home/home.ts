@@ -10,13 +10,11 @@ import { Observable } from 'rxjs/Observable';
 })
 export class HomePage {
 
-  private currentUser: string; // get the UID so we can create a collection for each user who is registered
   public todos: Observable<Todo[]>; // keep the list with all todos we have in firestore
   public collection: AngularFirestoreCollection<Todo>; // collection keep the referance to our todos
 
   constructor(private navCtrl: NavController, private af: AngularFirestore, private toast: ToastController, private alert: AlertController) {
-    this.ionViewDidLoad();
-    this.collection = af.collection<Todo>('' + this.currentUser + '', (ref) => {
+    this.collection = af.collection<Todo>('' + this.af.app.auth().currentUser + '', (ref) => {
       return ref.where('finished', '==', false);
     }); // creating a reference to collection where we want all todos == false
     this.todos = this.collection.snapshotChanges() // Getting all todos from collection
@@ -118,11 +116,6 @@ export class HomePage {
   // go to the page where todo is archived
   goToArchivedTodosPage() {
     this.navCtrl.push('ArchivedTodosPage');
-  }
-
-  // when this is loading get user email adress, also using it to create a collection for users email
-  ionViewDidLoad() {
-    this.currentUser = this.af.app.auth().currentUser.uid;
   }
 
 }

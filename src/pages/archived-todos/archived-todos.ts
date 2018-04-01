@@ -13,14 +13,13 @@ import { Todo } from '../../models/Todo';
 })
 export class ArchivedTodosPage {
 
-  public currentUser: string; // get the UID so we can create a collection for each user who is registered
   public todos: Observable<Todo[]>; // keep the list with all todos we have in firestore
   private collection: AngularFirestoreCollection<Todo>; // collection keep the referance to our todos
 
 
   constructor(public navCtrl: NavController, private af: AngularFirestore, private alert: AlertController, private toast: ToastController) {
-    this.ionViewDidLoad();
-    this.collection = af.collection<Todo>('' + this.currentUser + '', (ref) => {
+
+    this.collection = af.collection<Todo>('' + this.af.app.auth().currentUser + '', (ref) => { // create own collection for each user
       return ref.where('finished', '==', true);
     });
     this.todos = this.collection.snapshotChanges()
@@ -76,11 +75,6 @@ export class ArchivedTodosPage {
       duration: 2000
     }).present();
   }
-
-  ionViewDidLoad() {
-    this.currentUser = this.af.app.auth().currentUser.uid;
-  }
-
 
   goToTodosPage() {
     this.navCtrl.push(HomePage);

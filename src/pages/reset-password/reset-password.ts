@@ -11,7 +11,6 @@ import { AngularFirestore } from 'angularfire2/firestore';
 })
 export class ResetPasswordPage implements OnInit {
 
-  email: string;
   resetForm: FormGroup;
 
   constructor(private af: AngularFirestore, private toast: ToastController) {
